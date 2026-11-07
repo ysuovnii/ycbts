@@ -1,0 +1,33 @@
+server:
+  port: ${SERVER_PORT:10099}
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+    org.springframework.jdbc: INFO
+    org.springframework.orm.jpa: INFO
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: WARN
+
+spring:
+  datasource:
+    driver-class-name: ${DATABASE_DRIVER_CLASS_NAME:org.h2.Driver}
+    url: ${DATABASE_URL:jdbc:h2:mem:bankcore;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:password}
+  jpa:
+    database-platform: ${DATABASE_DIALECT:org.hibernate.dialect.H2Dialect}
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        types.print.banner: false
+    defer-datasource-initialization: true
+
+bankcore:
+  security:
+    username: ${BANKCORE_ADMIN_USERNAME:bankcore-admin}
+    password: ${BANKCORE_ADMIN_PASSWORD:change-me-in-env}
